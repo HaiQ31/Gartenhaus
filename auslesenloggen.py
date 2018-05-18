@@ -6,6 +6,7 @@ import RPi.GPIO as gpio
 from urllib.request import urlopen
 import time
 import Adafruit_DHT as dht
+from mcp3008 import mcp
 
 # ThingSpeak API key hier eintragen
 APIkey = '1UD90R8GS1L0217H'
@@ -16,10 +17,10 @@ spi.open(0,0)
 spi.max_speed_hz = 1000000
 
 # Daten vom MCP3008 lesen
-def mcp(channel):
- adc = spi.xfer2([1,(8+channel)<<4,0])
- data = ((adc[1]&3) << 8) + adc[2]
- return data
+#def mcp(channel):
+# adc = spi.xfer2([1,(8+channel)<<4,0])
+# data = ((adc[1]&3) << 8) + adc[2]
+# return data
 
 licht = mcp(0)
 sensor = dht.DHT11
