@@ -7,6 +7,9 @@ from urllib.request import urlopen
 import time
 import Adafruit_DHT as dht
 
+# ThingSpeak API key hier eintragen
+APIkey = '1UD90R8GS1L0217H'
+
 # SPI Verbindung herstellen und Geschwindigkeit festlegen
 spi = spidev.SpiDev()
 spi.open(0,0)
@@ -34,7 +37,6 @@ fobj_out.close()
 
 # Daten an Thingspeak senden
 baseURL = 'https://thingspeak.com/update?key='
-APIkey = '1UD90R8GS1L0217H'
 
 f1 = str(temperatur)
 f2 = str(feuchtigkeit)
@@ -49,4 +51,4 @@ fdata_out.close()
 #print(fdata)
 f.close()
 
-# Es wird ein cronjob in crontab -e angelget, der diese Datei regelmäßig ausfürht. Bei Änderungen beachten.
+# Es wird ein cronjob in crontab -e angelget, der diese Datei regelmäßig ausführt. Bei Änderungen beachten.
