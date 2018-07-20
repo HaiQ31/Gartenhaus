@@ -42,7 +42,7 @@ baseURL = 'https://thingspeak.com/update?key='
 f1 = str(temperatur)
 f2 = str(feuchtigkeit)
 f3 = str(licht)
-#f4 = str(druck)
+f4 = str(druck)
 
 f = urlopen(baseURL + APIkey + '&field1=' + f1 + '&field2=' + f2 + '&field3=' + f3)
 fdata = f.read()
