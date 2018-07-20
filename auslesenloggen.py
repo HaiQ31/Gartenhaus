@@ -5,7 +5,7 @@ import os
 import RPi.GPIO as gpio
 from urllib.request import urlopen
 import time
-import Adafruit_DHT as dht
+#import Adafruit_DHT as dht
 from mcp3008 import mcp
 
 # ThingSpeak API key hier eintragen
@@ -23,18 +23,18 @@ spi.max_speed_hz = 1000000
 # return data
 
 licht = mcp(0)
-sensor = dht.DHT11
-pin = 17
-feuchtigkeit, temperatur = dht.read_retry(sensor,pin)
+#sensor = dht.DHT11
+#pin = 17
+#feuchtigkeit, temperatur = dht.read_retry(sensor,pin)
 
 # Messfehler abfangen
-if str(feuchtigkeit) !='None' and feuchtigkeit > 100:
- time.sleep(2)
- feuchtigkeit, temperatur = dht.read_retry(sensor,pin)
+#if str(feuchtigkeit) !='None' and feuchtigkeit > 100:
+# time.sleep(2)
+temperatur,druck,feuchtigkeit = bme280.readBME280All()
 
-fobj_out = open("wetter.txt","a")
-fobj_out.write("\n"+time.strftime("%d.%m.%Y,%H:%M:%S") + ","+str(temperatur)+","+str(feuchtigkeit)+","+str(mcp(0)))
-fobj_out.close()
+#fobj_out = open("wetter.txt","a")
+#fobj_out.write("\n"+time.strftime("%d.%m.%Y,%H:%M:%S") + ","+str(temperatur)+","+str(feuchtigkeit)+","+str(mcp(0)))
+#fobj_out.close()
 
 # Daten an Thingspeak senden
 baseURL = 'https://thingspeak.com/update?key='
@@ -42,6 +42,7 @@ baseURL = 'https://thingspeak.com/update?key='
 f1 = str(temperatur)
 f2 = str(feuchtigkeit)
 f3 = str(licht)
+#f4 = str(druck)
 
 f = urlopen(baseURL + APIkey + '&field1=' + f1 + '&field2=' + f2 + '&field3=' + f3)
 fdata = f.read()
